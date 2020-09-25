@@ -1,54 +1,64 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button
+    type="button"
+    :class="classes"
+    :style="style"
+    :disabled="disabled"
+    @click="onClick"
+  >
+    <slot />
+  </button>
 </template>
 
 <script>
-import './button.css';
+import "./button.css";
 
 export default {
-  name: 'my-button',
-
+  name: "my-button",
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    primary: {
-      type: Boolean,
-      default: false,
+    width: {
+      type: String
     },
     size: {
       type: String,
-      default: 'medium',
-      validator: function (value) {
-        return ['small', 'medium', 'large'].indexOf(value) !== -1;
-      },
+      default: "medium",
+      validator: value => {
+        return ["small", "medium", "large"].indexOf(value) !== -1;
+      }
     },
-    backgroundColor: {
+    bgStyle: {
       type: String,
+      default: "flat",
+      validator: value => {
+        return ["flat", "gradient", "transparent"].indexOf(value) !== -1;
+      }
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
 
   computed: {
     classes() {
       return {
-        'storybook-button': true,
-        'storybook-button--primary': this.primary,
-        'storybook-button--secondary': !this.primary,
-        [`storybook-button--${this.size}`]: true,
+        btn: true,
+        [`btn-${this.bgStyle}`]: true
       };
     },
     style() {
       return {
-        backgroundColor: this.backgroundColor,
+        width: this.width,
+        boxShadow: "0px 2.85306px 10.699px rgba(0, 0, 0, 0.05)",
+        borderRadius: "4px"
       };
-    },
+    }
   },
 
   methods: {
     onClick() {
-      this.$emit('onClick');
-    },
-  },
+      this.$emit("onClick");
+    }
+  }
 };
 </script>
