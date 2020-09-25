@@ -11,6 +11,7 @@ export default {
     bgStyle: {
       control: { type: "select", options: ["flat", "gradient", "transparent"] }
     }
+    
   }
 };
 
