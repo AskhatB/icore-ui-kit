@@ -1,8 +1,8 @@
-import MyButton from "../components/Button";
+import UIInput from "../components/Input";
 
 export default {
-  title: "Example/Button",
-  component: MyButton,
+  title: "Example/Input",
+  component: UIInput,
   argTypes: {
     bgColor: { control: "color" },
     fontColor: { control: "color" },
@@ -17,9 +17,9 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { MyButton },
+  components: { UIInput },
   template:
-    '<my-button @onClick="onClick" v-bind="$props">Привет мир!</my-button>'
+    '<UIInput @onChange="onChange" v-bind="$props">Привет мир!</UIInput>'
 });
 
 export const Large = Template.bind({});

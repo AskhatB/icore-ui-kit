@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  width: 147px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-flat {
+  background: #019DFF;
+}
+
+.btn-gradient {
+  background: linear-gradient(140.91deg, #019DFF 15.26%, #21CEE5 88.53%);
+}
+
+.btn-transparent {
+  background: transparent;
+}
+
+.btn:disabled {
+  background: #BDBDBD !important;
+}
+
+.btn-small {
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.btn-medium {
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.btn-large {
+  width: 200px;
+  height: 50px;
+  font-size: 16px;
+}
+
+.btn-circle {
+  border-radius: 50%;
+}
