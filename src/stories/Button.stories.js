@@ -11,7 +11,6 @@ export default {
     bgStyle: {
       control: { type: "select", options: ["flat", "gradient", "transparent"] }
     }
-    
   }
 };
 
@@ -25,11 +24,14 @@ const Template = (args, { argTypes }) => ({
 export const Large = Template.bind({});
 Large.args = {
   size: "large",
-  label: "Button"
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+  size: "medium",
 };
 
 export const Small = Template.bind({});
 Small.args = {
   size: "small",
-  label: "Button"
 };
