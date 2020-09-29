@@ -1,17 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
 .btn {
+  display: flex;
+  align-items: center;
   font-family: 'Montserrat', sans-serif;
-  width: 147px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   border: none;
   outline: none;
+  transition: all .1s ease-in-out;
+  box-sizing: border-box;
+}
+
+.btn:hover {
+  transition: all .1s ease-in-out;
+  opacity: 0.8;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-flat {
   background: #019DFF;
+}
+
+.btn-icon-right {
+  flex-direction: row-reverse;
+}
+
+.btn-flat:active > div,
+.btn-flat:active > svg {
+  opacity: 0.65;
+}
+
+.btn-flat:focus,
+.btn-flat:active {
+  outline: 0;
+  box-shadow: 0 0 0 2px #DCF1FF !important;
 }
 
 .btn-gradient {
@@ -23,27 +47,44 @@
 }
 
 .btn:disabled {
-  background: #BDBDBD !important;
+  background: #E6E6E6 !important;
 }
 
 .btn-small {
-  width: 100px;
-  height: 30px;
+  padding: 4px 16px;
   font-size: 12px;
 }
 
 .btn-medium {
-  width: 150px;
-  height: 40px;
+  padding: 8px 16px;
   font-size: 14px;
 }
 
 .btn-large {
-  width: 200px;
-  height: 50px;
+  padding: 16px 36px;
   font-size: 16px;
 }
 
 .btn-circle {
   border-radius: 50%;
+}
+
+.btn-icon-only {
+  padding: 0;
+  justify-content: center;
+}
+
+.btn-icon-only-small {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-icon-only-medium {
+  width: 36px;
+  height: 36px;
+}
+
+.btn-icon-only-large {
+  width: 52px;
+  height: 52px;
 }

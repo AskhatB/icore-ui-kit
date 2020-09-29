@@ -4,13 +4,16 @@ export default {
   title: "Example/Button",
   component: MyButton,
   argTypes: {
-    bgColor: { control: "color" },
+    color: { control: "color" },
     fontColor: { control: "color" },
     size: {
       control: { type: "select", options: ["small", "medium", "large"] }
     },
     bgStyle: {
       control: { type: "select", options: ["flat", "gradient", "transparent"] }
+    },
+    iconAlign: {
+      control: { type: "select", options: ["left", "right"] }
     }
   }
 };
@@ -35,4 +38,25 @@ Medium.args = {
 export const Small = Template.bind({});
 Small.args = {
   size: "small"
+};
+
+export const LargeOnlyIcon = Template.bind({});
+LargeOnlyIcon.args = {
+  iconButton: true,
+  size: "large",
+  icon: "blocks"
+};
+
+export const MediumOnlyIcon = Template.bind({});
+MediumOnlyIcon.args = {
+  iconButton: true,
+  size: "medium",
+  icon: "blocks"
+};
+
+export const SmallOnlyIcon = Template.bind({});
+SmallOnlyIcon.args = {
+  iconButton: true,
+  size: "small",
+  icon: "blocks"
 };
