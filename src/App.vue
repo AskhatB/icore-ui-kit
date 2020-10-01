@@ -1,13 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <UiInput v-model="inputValue" />
   </div>
 </template>
 
 <script>
+import UiInput from "../src/components/Input";
 
 export default {
-  name: "App"
+  name: "App",
+  components: { UiInput },
+  data() {
+    return {
+      inputValue: "",
+      data: [{ name: "test", title: "test" }]
+    };
+  }
 };
 </script>
 

@@ -1,1 +1,30 @@
-.popover {}
+.popover {
+  max-width: 380px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+}
+
+.popover-wrapper {
+  width: max-content;
+  position: relative;
+}
+
+.popover-triangle {
+  top: calc(100% + 10px);
+}
+
+.popover-triangle:after,
+.popover-triangle:before {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ffffff;
+    top: -8px;
+    content: '';
+    left: 8px;
+    position: absolute;
+}
+
+.popover-border-radius {
+  border-radius: 10px;
+}

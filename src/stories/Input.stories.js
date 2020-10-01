@@ -4,13 +4,17 @@ export default {
   title: "Example/Input",
   component: UIInput,
   argTypes: {
-    bgColor: { control: "color" },
-    fontColor: { control: "color" },
+    iconAlign: {
+      control: { type: "select", options: ["left", "right"] }
+    },
     size: {
       control: { type: "select", options: ["small", "medium", "large"] }
     },
-    bgStyle: {
-      control: { type: "select", options: ["flat", "gradient", "transparent"] }
+    type: {
+      control: {
+        type: "select",
+        options: ["text", "number", "password", "tel", "email", "url", "search"]
+      }
     }
   }
 };
@@ -19,7 +23,7 @@ const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { UIInput },
   template:
-    '<UIInput @onChange="onChange" v-bind="$props">Привет мир!</UIInput>'
+    '<UIInput @onChange="onChange" v-bind="$props" placeholder="Назначить аудит" />'
 });
 
 export const Large = Template.bind({});

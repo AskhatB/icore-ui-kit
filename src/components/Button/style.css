@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import "../../style/variables.css";
 
 .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -11,6 +14,8 @@
   outline: none;
   transition: all .1s ease-in-out;
   box-sizing: border-box;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .btn:hover {
@@ -19,12 +24,40 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn-flat {
-  background: #019DFF;
+.btn-primary   { background: var(--main-primary); }
+.btn-secondary { background: var(--main-secondary); }
+.btn-success   { background: var(--main-success); }
+.btn-orange    { background: var(--main-orange); }
+.btn-danger    { background: var(--main-danger); }
+
+.btn-primary-outlined {
+  color: var(--main-primary);
+  border: 1px solid var(--main-primary);
 }
 
-.btn-icon-right {
-  flex-direction: row-reverse;
+.btn-secondary-outlined {
+  color: var(--main-secondary);
+  border: 1px solid var(--main-secondary);
+}
+
+.btn-success-outlined {
+  color: var(--main-success);
+  border: 1px solid var(--main-success);
+}
+
+.btn-orange-outlined {
+  color: var(--main-orange);
+  border: 1px solid var(--main-orange);
+}
+
+.btn-danger-outlined {
+  color: var(--main-danger);
+  border: 1px solid var(--main-danger);
+}
+
+.btn-outlined-disabled {
+  color: #E5E5E5 !important;
+  border: 1px solid #E5E5E5 !important;
 }
 
 .btn-flat:active > div,
@@ -46,7 +79,7 @@
   background: transparent;
 }
 
-.btn:disabled {
+.btn-disabled {
   background: #E6E6E6 !important;
 }
 
@@ -71,7 +104,6 @@
 
 .btn-icon-only {
   padding: 0;
-  justify-content: center;
 }
 
 .btn-icon-only-small {
@@ -87,4 +119,8 @@
 .btn-icon-only-large {
   width: 52px;
   height: 52px;
+}
+
+.btn-icon-right {
+  flex-direction: row-reverse;
 }

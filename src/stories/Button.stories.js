@@ -4,8 +4,12 @@ export default {
   title: "Example/Button",
   component: MyButton,
   argTypes: {
-    color: { control: "color" },
-    fontColor: { control: "color" },
+    variant: {
+      control: {
+        type: "select",
+        options: ["primary", "secondary", "success", "orange", "danger"]
+      }
+    },
     size: {
       control: { type: "select", options: ["small", "medium", "large"] }
     },

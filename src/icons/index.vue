@@ -11,12 +11,14 @@
 import Tick from "./Tick";
 import MoneyBag from "./MoneyBag";
 import Blocks from "./Blocks";
+import ClearCircle from "./ClearCircle";
 
 export default {
   components: {
     Tick,
     MoneyBag,
-    Blocks
+    Blocks,
+    ClearCircle
   },
   props: {
     name: { type: String, default: "" },

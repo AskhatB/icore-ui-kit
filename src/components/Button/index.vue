@@ -8,9 +8,9 @@
   >
     <icon
       :name="icon"
-      :width="iconSize"
-      :height="iconSize"
-      :color="style.color"
+      :width="iconParams.size"
+      :height="iconParams.size"
+      :color="iconParams.color"
     />
     <div v-if="!iconButton" :style="contentStyle">
       <slot />
@@ -20,22 +20,27 @@
 
 <script>
 import Icon from "../../icons";
+import { generalColors } from "../../variables";
 
 export default {
-  components: { Icon },
   name: "my-button",
+  components: { Icon },
   props: {
-    width: { type: String },
-    height: { type: String },
-    fontSize: { type: String },
-    color: { type: String },
     disabled: { type: Boolean, default: false },
     outlined: { type: Boolean, default: false },
     round: { type: String, default: "4px" },
     circle: { type: Boolean, default: false },
-    fontColor: { type: String, default: "#ffffff" },
     icon: { type: String },
     iconButton: { type: Boolean, default: false },
+    fluid: { type: Boolean, default: false },
+    variant: {
+      type: String,
+      default: "primary",
+      validator: value =>
+        ["primary", "secondary", "success", "orange", "danger"].indexOf(
+          value
+        ) !== -1
+    },
     iconAlign: {
       type: String,
       default: "left",
@@ -56,14 +61,17 @@ export default {
 
   computed: {
     classes() {
-      const bgStyle = this.outlined ? "transparent" : this.bgStyle;
       return {
         btn: true,
         "btn-circle": this.circle,
         "btn-icon-right": this.iconAlign === "right",
         "btn-icon-only": this.iconButton,
-        [`btn-${bgStyle}`]: true,
-        [`btn-${this.size}`]: !this.width,
+        "btn-outlined-disabled": this.outlined && this.disabled,
+        "btn-disabled": !this.outlined && this.disabled,
+        [`btn-${this.variant}`]: !this.outlined,
+        [`btn-${this.size}`]: true,
+        [`btn-${this.variant}-outlined`]: this.outlined,
+        [`btn-${this.bgStyle}`]: !this.outlined,
         [`btn-icon-only-${this.size}`]: this.iconButton
       };
     },
@@ -74,24 +82,34 @@ export default {
       };
     },
 
-    iconSize() {
+    iconParams() {
       const sizes = { large: "20px", medium: "16px", small: "12px" };
       const sizesIconOnly = { large: "24px", medium: "20px", small: "12px" };
-      return this.iconButton ? sizesIconOnly[this.size] : sizes[this.size];
+      const params = {
+        color: this.outlined ? generalColors[this.variant] : "#ffffff",
+        size: this.iconButton ? sizesIconOnly[this.size] : sizes[this.size]
+      };
+
+      if (this.outlined) {
+        if (this.disabled) {
+          params.color = "#E6E6E6";
+        } else {
+          params.color = generalColors[this.variant];
+        }
+      } else {
+        params.color = "#ffffff";
+      }
+
+      return params;
     },
 
     style() {
-      const disabledColor = this.disabled ? "#E5E5E5" : this.color;
       return {
-        width: this.width,
-        height: this.height,
+        width: this.fluid ? "100%" : null,
         minWidth: !this.iconButton ? "100px" : null,
-        background: !this.outlined ? disabledColor : "transparent !important",
-        color: this.outlined ? disabledColor : this.fontColor,
-        fontSize: this.fontSize,
-        boxShadow: this.outlined
-          ? `0 0 0 2px ${disabledColor} !important`
-          : "0px 2.85306px 10.699px rgba(0, 0, 0, 0.05)",
+        boxShadow: !this.outlined
+          ? "0px 2.85306px 10.699px rgba(0, 0, 0, 0.05)"
+          : null,
         borderRadius: this.circle ? "50%" : this.round
       };
     }
@@ -105,4 +123,4 @@ export default {
 };
 </script>
 
-<style src="./button.css" scoped></style>
+<style src="./style.css" scoped></style>

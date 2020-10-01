@@ -1,29 +1,52 @@
 <template>
-  <label class="field" :class="classes" :style="fieldStyle">
+  <label
+    :class="classes"
+    :style="fieldStyle"
+    @mouseenter="hovered = true"
+    @mouseleave="hovered = false"
+  >
+    <div v-if="icon" class="field-icon" :style="iconWrapperStyle">
+      <icon :name="icon" :color="iconColor" width="16px" height="16px" />
+    </div>
     <input
-      v-model="inputValue"
+      :v-model="value"
       :type="type"
       :disabled="disabled"
       :placeholder="placeholder"
+      :style="inputStyle"
       @input="onChange"
+      @focus="onFocus"
+      @blur="onBlur"
     />
-    <div class="field-bg" :style="bgStyle"></div>
+    <div class="field-label">{{ label }}</div>
+    <div class="field-clear" @click.stop="clear">
+      <icon name="clear-circle" width="12px" height="12px" />
+    </div>
   </label>
 </template>
 
 <script>
+import Icon from "../../icons";
+import { generalColors } from "../../variables";
+
 export default {
   name: "ui-input",
+  components: { Icon },
   props: {
-    value: {},
-    width: { type: String },
-    height: { type: String },
-    fontColor: { type: String },
-    bgColor: { type: String },
+    value: { type: [String, Object, Array, Number], default: null },
     placeholder: { type: String, default: "" },
-    fontSize: { type: String, default: "14px" },
     disabled: { type: Boolean, default: false },
+    error: { type: Boolean, default: false },
+    warning: { type: Boolean, default: false },
     round: { type: String, default: "4px" },
+    label: { type: String, default: "" },
+    icon: { type: String, default: null },
+    iconFilled: { type: Boolean, default: false },
+    iconAlign: {
+      type: String,
+      default: "left",
+      validator: value => ["left", "right"].indexOf(value) !== -1
+    },
     size: {
       type: String,
       default: "medium",
@@ -39,39 +62,75 @@ export default {
     }
   },
 
+  data() {
+    return {
+      hovered: false,
+      focused: false
+    };
+  },
+
   computed: {
-    inputValue: {
-      get() {
-        return this.value;
-      },
-      set(val) {
-        this.$emit("onChange", val);
-      }
-    },
     classes() {
       return {
         field: true,
+        "field-disabled": this.disabled,
+        "field-icon-right": this.iconAlign === "right",
+        "field-icon-filled": this.iconFilled,
         [`field-${this.size}`]: true
       };
     },
+
     fieldStyle() {
       return {
-        width: this.width,
-        height: this.height,
-        boxShadow: "0px 2.85306px 10.699px rgba(0, 0, 0, 0.05)",
-        backgroundColor: this.bgColor
+        background: this.disabled ? generalColors.gray[100] : "#ffffff",
+        borderRadius: this.round,
+        boxShadow: `0 0 0 ${this.focused ? "1.5px" : "1px"} ${this.colorState}`
       };
     },
+
     bgStyle() {
       return {
-        borderRadius: this.round,
-        border: `1px solid #7ACCFF`
+        borderRadius: this.round
       };
     },
+
+    iconWrapperStyle() {
+      return {
+        background: this.iconFilled ? this.colorState : null,
+        borderRadius:
+          this.iconAlign === "left"
+            ? `${this.round} 0 0 ${this.round}`
+            : `0 ${this.round} ${this.round} 0`
+      };
+    },
+
+    iconColor() {
+      return this.iconFilled ? "#ffffff" : this.colorState;
+    },
+
+    colorState() {
+      if (this.disabled) {
+        return generalColors.gray[200];
+      }
+      if (this.error) {
+        return generalColors.danger;
+      }
+      if (this.warning) {
+        return generalColors.orange;
+      }
+      if (this.focused) {
+        return generalColors.blue[300];
+      }
+      if (this.hovered) {
+        return generalColors.blue[200];
+      }
+      return generalColors.blue[100];
+    },
+
     inputStyle() {
       return {
-        color: this.fontColor,
-        fontSize: this.fontSize
+        background: this.disabled ? generalColors.gray[100] : "#ffffff",
+        marginLeft: this.icon && !this.iconFilled ? "0" : "10px"
       };
     }
   },
@@ -79,9 +138,23 @@ export default {
   methods: {
     onChange(event) {
       this.$emit("onChange", event);
+    },
+
+    onFocus() {
+      this.hovered = false;
+      this.focused = true;
+    },
+
+    onBlur() {
+      this.focused = false;
+      console.log("we", this.value);
+    },
+
+    clear() {
+      this.value = "";
     }
   }
 };
 </script>
 
-<style src="./input.css" scoped></style>
+<style src="./style.css" scoped></style>

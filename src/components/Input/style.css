@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+.field {
+  display: flex;
+  font-family: 'Montserrat', sans-serif;
+  align-items: center;
+  position: relative;
+  width: 230px;
+  height: 33px;
+}
+
+.field input {
+  width: 81%;
+  font-family: inherit;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  z-index: 99;
+  box-shadow: none;
+  height: 25px;
+  padding: 0;
+  color: #333333;
+}
+
+.field input::placeholder {
+  color: #E5E5E5;
+}
+
+.field-disabled {
+  box-shadow: none !important;
+  background: #E6E6E6 !important;
+}
+
+.field-disabled input::placeholder {
+  color: #B2B2B2 !important;
+}
+
+.field-icon-right {
+  flex-direction: row-reverse;
+}
+
+.field-clear {
+  position: absolute;
+  right: 8px;
+  cursor: pointer;
+}
+
+.field-icon {
+  width: 34px;  
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.field-label {
+  position: absolute;
+  font-size: 14px;
+  top: -20px;
+  left: 0;
+  color: #616161;
+}
+
+.field-small {}
+.field-medium {}
+.field-large {}
